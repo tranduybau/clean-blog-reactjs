@@ -37,11 +37,6 @@ class Nav extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/detail-post">
-                  Sample Post
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link" to="/contact">
                   Contact
                 </Link>
