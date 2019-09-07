@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getDataOfAllPosts } from "../redux/actions/actions";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { posts: [] };
-  }
-
   UNSAFE_componentWillMount() {}
 
   /* RENDER */
@@ -91,4 +84,4 @@ class Home extends Component {
   }
 }
 
-export default connect(Home);
+export default Home;
