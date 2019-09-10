@@ -1,23 +1,20 @@
 import { GET_POST, GET_POSTS } from "../actions/actionTypes";
-import axios from "axios";
 
-export default function(
-  state = { posts: null, post: null, isLoading: false },
-  action,
-) {
-  switch (action.type) {
-    case GET_POSTS: {
-      axios.get("https://api.tvmaze.com/search/shows?q=batman").then(res => {
-        console.log(res);
+var initialState = {
+	posts: null,
+	post: null,
+	isLoading: false,
+};
 
-        state.posts = res;
-      });
-      return state;
-    }
-    case GET_POST: {
-      return state;
-    }
-    default:
-      return state;
-  }
+export default function(state = initialState, action) {
+	switch (action.type) {
+		case GET_POSTS: {
+			return Object.assign({}, state);
+		}
+		case GET_POST: {
+			return Object.assign({}, state);
+		}
+		default:
+			return Object.assign({}, state);
+	}
 }
