@@ -25,12 +25,14 @@ export default function(state = initialState, action) {
 		case FETCH_POSTS_SUCCESSED: {
 			return Object.assign({}, state, {
 				posts: action.payload,
+				isLoading: false,
 			});
 		}
 
 		case FETCH_POSTS_FAILED: {
 			return Object.assign({}, state, {
 				error: action.error,
+				isLoading: false,
 			});
 		}
 
@@ -43,12 +45,14 @@ export default function(state = initialState, action) {
 		case FETCH_POST_SUCCESSED: {
 			return Object.assign({}, state, {
 				post: action.payload,
+				isLoading: false,
 			});
 		}
 
 		case FETCH_POST_FAILED: {
 			return Object.assign({}, state, {
 				error: action.error,
+				isLoading: false,
 			});
 		}
 
