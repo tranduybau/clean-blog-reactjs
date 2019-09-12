@@ -8,8 +8,8 @@ import {
 } from "../constants/actionTypes";
 
 var initialState = {
-	posts: null,
-	post: null,
+	posts: [],
+	post: {},
 	isLoading: false,
 	error: null,
 };

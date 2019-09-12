@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { fetchAllPostsFromApi } from "dispatchers";
+import { showArticles } from "dispatchers";
 
 class Home extends Component {
 	constructor(props) {
@@ -15,7 +15,7 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchAllPostsFromApi();
+		this.props.showArticles();
 	}
 
 	/* RENDER */
@@ -92,12 +92,12 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-	fetchAllPostsFromApi: PropTypes.func.isRequired,
+	showArticles: PropTypes.func.isRequired,
 	articles: PropTypes.arrayOf,
 };
 
 Home.defaultProps = {
-	articles: {},
+	articles: [],
 };
 
 const mapStateToProps = state => {
@@ -107,7 +107,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-	fetchAllPostsFromApi,
+	showArticles,
 };
 
 export default connect(
