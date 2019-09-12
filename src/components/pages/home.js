@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { fetchAllPostsFromApi } from "dispatchers'";
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			currentPage: 1,
 			articles: [],
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+		this.props.fetchAllPostsFromApi();
+	}
 
 	/* RENDER */
 	render() {
@@ -86,4 +91,26 @@ class Home extends Component {
 	}
 }
 
-export default Home;
+Home.propTypes = {
+	fetchAllPostsFromApi: PropTypes.func.isRequired,
+	articles: PropTypes.arrayOf,
+};
+
+Home.defaultProps = {
+	articles: {},
+};
+
+const mapStateToProps = state => {
+	return {
+		articles: state.posts,
+	};
+};
+
+const mapDispatchToProps = {
+	fetchAllPostsFromApi,
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Home);

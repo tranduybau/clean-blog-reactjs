@@ -1,2 +1,0 @@
-export const GET_POST = "GET_DETAIL_OF_ONE_POST";
-export const GET_POSTS = "GET_ALL_THE_POSTS_FROM_SERVER";
