@@ -17,7 +17,7 @@ export const fetchOnePostFromApi = id => {
 	return axios.get(`http://api.tvmaze.com/shows/${id}`);
 };
 
-export const showArticles = () => {
+export const showPosts = () => {
 	return dispatch => {
 		dispatch(getDataOfAllPosts());
 		fetchAllPostsFromApi()
@@ -26,7 +26,7 @@ export const showArticles = () => {
 	};
 };
 
-export const showOneArticle = id => {
+export const showOnePost = id => {
 	return dispatch => {
 		dispatch(getDetailOfOnePost());
 		fetchOnePostFromApi(id)

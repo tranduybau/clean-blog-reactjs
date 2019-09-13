@@ -1,29 +1,53 @@
 import React, { Component } from "react";
-
-const headerStyle = {
-  backgroundImage: `url("/img/home-bg.jpg")`,
-};
+import { connect } from "react-redux";
+import ProTypes from "prop-types";
 
 class Header extends Component {
-  render() {
-    return (
-      <header className="masthead" style={headerStyle}>
-        <div className="overlay"></div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 col-md-10 mx-auto">
-              <div className="site-heading">
-                <h1>Clean Blog</h1>
-                <span className="subheading">
-                  A Blog Theme by Start Bootstrap
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-    );
-  }
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			post: {},
+		};
+	}
+
+	headerStyle = post => {
+		return `url('${post && post.image ? post.image.original : "/img/home-bg.jpg"}')`;
+	};
+
+	render() {
+		const { post } = this.props.post || {};
+		console.log(post);
+
+		return (
+			<header className="masthead mb-3" style={{ backgroundImage: `${this.headerStyle(post)}` }}>
+				<div className="overlay"></div>
+				<div className="container">
+					<div className="row">
+						<div className="col-lg-8 col-md-10 mx-auto">
+							<div className="site-heading">
+								<h1>{post.name ? post.name : 'Blog'}</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+		);
+	}
 }
 
-export default Header;
+Header.proTypes = {
+	post: ProTypes.object,
+};
+
+Header.defaultProps = {
+	post: {},
+};
+
+const mapStateToProps = state => {
+	return {
+		post: state.post,
+	};
+};
+
+export default connect(mapStateToProps)(Header);

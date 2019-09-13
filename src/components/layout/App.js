@@ -5,15 +5,15 @@ import Main from "./main";
 import Footer from "./footer";
 
 function App() {
-  return (
-    <div className="App">
-      <Nav />
-      <Header />
-      <Main />
-      <hr />
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="App">
+			<Nav />
+			<Header />
+			<Main />
+			<hr />
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
