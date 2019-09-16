@@ -20,6 +20,7 @@ class DetailPost extends Component {
 
 		this.props.showLoader();
 		this.props.showOnePost(postId);
+
 		document.body.scrollTop = 0;
 		document.documentElement.scrollTop = 0;
 	}
