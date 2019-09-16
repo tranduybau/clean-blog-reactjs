@@ -10,20 +10,18 @@ import {
 	getDetailOfOnePostFailed,
 	startLoading,
 	stopLoading,
+	openSearchBox,
+	closeSearchBox,
+	searchPostsByKeyword,
+	searchPostsByKeywordSuccess,
+	searchPostsByKeywordFailed,
 } from "../actions/actions";
-
-export const fetchAllPostsFromApi = () => {
-	return axios.get("https://api.tvmaze.com/search/shows?q=batman");
-};
-
-export const fetchOnePostFromApi = id => {
-	return axios.get(`http://api.tvmaze.com/shows/${id}`);
-};
 
 export const showPosts = () => {
 	return dispatch => {
 		dispatch(getDataOfAllPosts());
-		fetchAllPostsFromApi()
+		axios
+			.get("https://api.tvmaze.com/search/shows?q=batman")
 			.then(res => {
 				dispatch(getDataOfAllPostsSuccessed(res.data));
 			})
@@ -36,7 +34,8 @@ export const showPosts = () => {
 export const showOnePost = id => {
 	return dispatch => {
 		dispatch(getDetailOfOnePost());
-		fetchOnePostFromApi(id)
+		axios
+			.get(`http://api.tvmaze.com/shows/${id}`)
 			.then(res => {
 				dispatch(getDetailOfOnePostSuccessed(res.data));
 			})
@@ -58,5 +57,27 @@ export const showLoader = () => {
 		setTimeout(() => {
 			dispatch(stopLoading());
 		}, 1500);
+	};
+};
+
+export const openSearchComponent = () => {
+	return dispatch => {
+		dispatch(openSearchBox());
+	};
+};
+
+export const closeSearchComponent = () => {
+	return dispatch => {
+		dispatch(closeSearchBox());
+	};
+};
+
+export const searchPosts = keyword => {
+	return dispatch => {
+		dispatch(searchPostsByKeyword());
+		axios
+			.get(`https://api.tvmaze.com/search/shows?q=${keyword}`)
+			.then(res => dispatch(searchPostsByKeywordSuccess(res.data)))
+			.catch(error => dispatch(searchPostsByKeywordFailed(error)));
 	};
 };

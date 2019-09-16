@@ -15,9 +15,7 @@ class App extends Component {
 				<Main />
 				<hr />
 				<Footer />
-				<div className="d-none">
-					<Seacher />
-				</div>
+				<Seacher />
 			</div>
 		);
 	}

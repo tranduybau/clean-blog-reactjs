@@ -8,6 +8,11 @@ import {
 	FETCH_POSTS_FAILED,
 	START_LOADING,
 	STOP_LOADING,
+	CLOSE_SEARCH_BOX,
+	OPEN_SEARCH_BOX,
+	SEARCH_POSTS_BY_KEYWORD,
+	SEARCH_POSTS_BY_KEYWORD_SUCCESS,
+	SEARCH_POSTS_BY_KEYWORD_FAILED,
 } from "../constants/actionTypes";
 
 export const getDataOfAllPosts = () => {
@@ -69,5 +74,36 @@ export const startLoading = () => {
 export const stopLoading = () => {
 	return {
 		type: STOP_LOADING,
+	};
+};
+
+// Search machine
+export const openSearchBox = () => {
+	return {
+		type: OPEN_SEARCH_BOX,
+	};
+};
+export const closeSearchBox = () => {
+	return {
+		type: CLOSE_SEARCH_BOX,
+	};
+};
+export const searchPostsByKeyword = () => {
+	return {
+		type: SEARCH_POSTS_BY_KEYWORD,
+	};
+};
+
+export const searchPostsByKeywordSuccess = data => {
+	return {
+		type: SEARCH_POSTS_BY_KEYWORD_SUCCESS,
+		payload: data,
+	};
+};
+
+export const searchPostsByKeywordFailed = error => {
+	return {
+		type: SEARCH_POSTS_BY_KEYWORD_FAILED,
+		error,
 	};
 };
