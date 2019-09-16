@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Header extends Component {
 	constructor(props) {
@@ -36,7 +36,7 @@ class Header extends Component {
 }
 
 Header.proTypes = {
-	post: ProTypes.object,
+	post: PropTypes.object,
 };
 
 Header.defaultProps = {

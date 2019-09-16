@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import { showOnePost } from "dispatchers";
 
@@ -60,8 +60,8 @@ class DetailPost extends Component {
 }
 
 DetailPost.proTypes = {
-	showOnePost: ProTypes.func.isRequired,
-	post: ProTypes.array,
+	showOnePost: PropTypes.func.isRequired,
+	post: PropTypes.array,
 };
 
 DetailPost.defaultProps = {

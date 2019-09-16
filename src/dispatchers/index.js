@@ -54,9 +54,9 @@ export const clearInfoPost = () => {
 
 export const showLoader = () => {
 	return dispatch => {
-		dispatch(startLoading);
+		dispatch(startLoading());
 		setTimeout(() => {
-			dispatch(stopLoading);
+			dispatch(stopLoading());
 		}, 1500);
 	};
 };
