@@ -1,0 +1,44 @@
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.top-0 {
+	top: 0;
+}
+
+.left-0 {
+	left: 0;
+}
+
+.z-index-99 {
+	z-index: 99;
+}
+
+.z-index-101 {
+	z-index: 101;
+}
+
+.z-index-100 {
+	z-index: 100;
+}
+
+.font-size-1em {
+	font-size: 1em;
+	line-height: 1.5;
+}
+
+.border-transparent {
+	border-color: transparent
+}
+
+.border-white {
+	border-color: white !important;
+}
+
+.pp-bg-cl {
+	background: #8c3bf2;
+}
+
+.transition-normal {
+	transition: 0.3s all ease;
+}

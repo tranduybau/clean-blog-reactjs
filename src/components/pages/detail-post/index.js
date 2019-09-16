@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProTypes from "prop-types";
 
-import { showOnePost, showLoader } from "dispatchers";
+import { showOnePost } from "dispatchers";
 
 import Tag from "../../shared/Tag/index";
 
@@ -18,7 +18,6 @@ class DetailPost extends Component {
 	componentDidMount() {
 		const { postId } = this.props.match.params;
 
-		this.props.showLoader();
 		this.props.showOnePost(postId);
 
 		document.body.scrollTop = 0;
@@ -64,7 +63,6 @@ class DetailPost extends Component {
 
 DetailPost.proTypes = {
 	showOnePost: ProTypes.func.isRequired,
-	showLoader: ProTypes.func.isRequired,
 	post: ProTypes.array,
 };
 
@@ -80,7 +78,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
 	showOnePost,
-	showLoader,
 };
 
 export default connect(
