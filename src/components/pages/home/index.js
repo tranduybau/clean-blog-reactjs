@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { showPosts, clearInfoPost, showLoader } from "dispatchers";
+import { showPosts, clearInfoPost } from "dispatchers";
 
 import ArticleItem from "../../shared/ArticleItem/index";
 
@@ -17,45 +17,41 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		this.props.showLoader();
 		this.props.showPosts();
 		this.props.clearInfoPost();
 	}
 
 	/* RENDER */
 	render() {
-		const { posts, isLoading } = this.props.post;
+		const { posts } = this.props.post;
 
-		if (!isLoading)
-			return (
-				<div className="container">
-					<div className="row">
-						<div className="col-lg-8 col-md-10 mx-auto">
-							<div className="clearfix">
-								{posts.map((item, index) => (
-									<div key={index}>
-										<ArticleItem item={item} />
-										<hr />
-									</div>
-								))}
-								<div className="d-none">
-									<Link className="btn btn-primary ml-auto" to="#">
-										Older Posts &rarr;
-									</Link>
+		return (
+			<div className="container">
+				<div className="row">
+					<div className="col-lg-8 col-md-10 mx-auto">
+						<div className="clearfix">
+							{posts.map((item, index) => (
+								<div key={index}>
+									<ArticleItem item={item} />
+									{index + 1 < posts.length ? <hr /> : ""}
 								</div>
+							))}
+							<div className="d-none">
+								<Link className="btn btn-primary ml-auto" to="#">
+									Older Posts &rarr;
+								</Link>
 							</div>
 						</div>
 					</div>
 				</div>
-			);
-		return <div className="d-none" />;
+			</div>
+		);
 	}
 }
 
 Home.propTypes = {
 	showPosts: PropTypes.func.isRequired,
 	clearInfoPost: PropTypes.func.isRequired,
-	showLoader: PropTypes.func.isRequired,
 	post: PropTypes.object,
 };
 
@@ -72,7 +68,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
 	showPosts,
 	clearInfoPost,
-	showLoader,
 };
 
 export default connect(
