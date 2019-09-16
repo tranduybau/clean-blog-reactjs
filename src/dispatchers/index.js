@@ -22,46 +22,33 @@ export const fetchOnePostFromApi = id => {
 
 export const showPosts = () => {
 	return dispatch => {
-		dispatch(startLoading());
 		dispatch(getDataOfAllPosts());
 		fetchAllPostsFromApi()
-			.then(res => {
-				dispatch(getDataOfAllPostsSuccessed(res.data));
-				setTimeout(() => {
-					dispatch(stopLoading());
-				}, 1500);
-			})
-			.catch(errors => {
-				dispatch(getDataOfAllPostsFailed(errors));
-				setTimeout(() => {
-					dispatch(stopLoading());
-				}, 1500);
-			});
+			.then(res => dispatch(getDataOfAllPostsSuccessed(res.data)))
+			.catch(errors => dispatch(getDataOfAllPostsFailed(errors)));
 	};
 };
 
 export const showOnePost = id => {
 	return dispatch => {
-		dispatch(startLoading());
 		dispatch(getDetailOfOnePost());
 		fetchOnePostFromApi(id)
-			.then(res => {
-				dispatch(getDetailOfOnePostSuccessed(res.data));
-				setTimeout(() => {
-					dispatch(stopLoading());
-				}, 1500);
-			})
-			.catch(errors => {
-				dispatch(getDetailOfOnePostFailed(errors));
-				setTimeout(() => {
-					dispatch(stopLoading());
-				}, 1500);
-			});
+			.then(res => dispatch(getDetailOfOnePostSuccessed(res.data)))
+			.catch(errors => dispatch(getDetailOfOnePostFailed(errors)));
 	};
 };
 
 export const clearInfoPost = () => {
 	return dispatch => {
 		dispatch(clearThePostDetail());
+	};
+};
+
+export const showLoader = () => {
+	return dispatch => {
+		dispatch(startLoading());
+		setTimeout(() => {
+			dispatch(stopLoading());
+		}, 1500);
 	};
 };
