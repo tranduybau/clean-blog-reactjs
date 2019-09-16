@@ -17,7 +17,6 @@ class Header extends Component {
 
 	render() {
 		const { post } = this.props.post || {};
-		console.log(post);
 
 		return (
 			<header className="masthead mb-3" style={{ backgroundImage: `${this.headerStyle(post)}` }}>
@@ -26,7 +25,7 @@ class Header extends Component {
 					<div className="row">
 						<div className="col-lg-8 col-md-10 mx-auto">
 							<div className="site-heading">
-								<h1>{post.name ? post.name : 'Blog'}</h1>
+								<h1>{post.name ? post.name : "Blog"}</h1>
 							</div>
 						</div>
 					</div>

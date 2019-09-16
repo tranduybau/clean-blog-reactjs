@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { showPosts } from "dispatchers";
+import { showPosts, clearInfoPost } from "dispatchers";
 
 import ArticleItem from "../../shared/ArticleItem/index";
 
@@ -18,6 +18,7 @@ class Home extends Component {
 
 	componentDidMount() {
 		this.props.showPosts();
+		this.props.clearInfoPost();
 	}
 
 	/* RENDER */
@@ -50,6 +51,7 @@ class Home extends Component {
 
 Home.propTypes = {
 	showPosts: PropTypes.func.isRequired,
+	clearInfoPost: PropTypes.func.isRequired,
 	post: PropTypes.object,
 };
 
@@ -65,6 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
 	showPosts,
+	clearInfoPost,
 };
 
 export default connect(

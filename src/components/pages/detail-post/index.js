@@ -19,6 +19,8 @@ class DetailPost extends Component {
 		const { postId } = this.props.match.params;
 
 		this.props.showOnePost(postId);
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
 	}
 
 	/* RENDER */
