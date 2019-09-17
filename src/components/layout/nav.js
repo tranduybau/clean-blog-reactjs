@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Nav extends Component {
+	constructor(props) {
+		super(props);
+
+		this.openSearchLayout = this.openSearchLayout.bind(this);
+	}
+
+	openSearchLayout() {
+		document.body.classList.add("overflow-hidden");
+		document.getElementById("searchEngine").classList.add("d-flex");
+		document.getElementById("searchBox").focus();
+	}
+
 	render() {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -18,7 +30,7 @@ class Nav extends Component {
 						aria-expanded="false"
 						aria-label="Toggle navigation">
 						Menu
-						<i className="fas fa-bars"></i>
+						<i className="fas fa-bars" />
 					</button>
 					<div className="collapse navbar-collapse" id="navbarResponsive">
 						<ul className="navbar-nav ml-auto align-items-center">
@@ -38,8 +50,8 @@ class Nav extends Component {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<div className="cursor-pointer text-white">
-									<i className="fas fa-search" title="Search"></i>
+								<div className="cursor-pointer text-white" onClick={this.openSearchLayout}>
+									<i className="fas fa-search" title="Search" />
 								</div>
 							</li>
 						</ul>
@@ -49,4 +61,5 @@ class Nav extends Component {
 		);
 	}
 }
+
 export default Nav;

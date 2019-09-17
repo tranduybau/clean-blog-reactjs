@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class ArticleItem extends Component {
-	shortHandDescription = Str => {
-		if (Str.length < 100) return Str;
-		else if (Str[99] === " ") return `${Str.substring(3, 94)}...`;
-		else return `${Str.substring(3, 95)}...`;
-	};
+	shortHandDescription(Str) {
+		if (Str.length)
+			if (Str[99] === " ") return `${Str.substring(3, 94)}...`;
+			else return `${Str.substring(3, 95)}...`;
+		return Str;
+	}
 
 	render() {
 		const { item } = this.props;
@@ -18,7 +19,9 @@ class ArticleItem extends Component {
 					<h2 className="post-title">{item.show.name}</h2>
 					<h3
 						className="post-subtitle"
-						dangerouslySetInnerHTML={{ __html: this.shortHandDescription(item.show.summary) }}
+						dangerouslySetInnerHTML={{
+							__html: this.shortHandDescription(item.show.summary ? item.show.summary : ""),
+						}}
 					/>
 				</Link>
 				<p className="post-meta ">

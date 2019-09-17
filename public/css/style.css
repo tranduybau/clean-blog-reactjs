@@ -38,6 +38,10 @@
 	z-index: 1902;
 }
 
+.z-index--100 {
+	z-index: -100;
+}
+
 .font-size-1em {
 	font-size: 1em;
 	line-height: 1.5;
@@ -57,4 +61,12 @@
 
 .transition-normal {
 	transition: 0.3s all ease;
+}
+
+.outline-0 {
+	outline: none !important;
+}
+
+.box-shadow-none {
+	box-shadow: none !important
 }
