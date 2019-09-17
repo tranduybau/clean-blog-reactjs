@@ -11,6 +11,7 @@ class Nav extends Component {
 	openSearchLayout() {
 		document.body.classList.add("overflow-hidden");
 		document.getElementById("searchEngine").classList.add("d-flex");
+		document.getElementById("searchBox").focus();
 	}
 
 	render() {

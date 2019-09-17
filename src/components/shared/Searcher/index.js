@@ -61,6 +61,7 @@ class Searcher extends Component {
 					<form className="input-group mb-3" onSubmit={this.searchPostsByKeyWord}>
 						<input
 							type="text"
+							id="searchBox"
 							className="form-control rounded-0 outline-0 box-shadow-none border-secondary"
 							value={this.state.value}
 							onChange={this.handleChange}
