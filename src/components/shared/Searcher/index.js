@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ProTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-import { searchPosts } from "../../../dispatchers/index";
+import { searchPosts, showLoader } from "../../../dispatchers/index";
 
 class Searcher extends Component {
 	constructor(props) {
@@ -32,6 +32,7 @@ class Searcher extends Component {
 		this.closeSearchBox();
 		this.props.history.push("/");
 		this.setState({ value: "" });
+		this.props.showLoader();
 	};
 
 	render() {
@@ -83,6 +84,7 @@ class Searcher extends Component {
 Searcher.proTypes = {
 	searchPosts: ProTypes.func.isRequired,
 	value: ProTypes.string,
+	showLoader: ProTypes.func.isRequired,
 };
 
 Searcher.defaultProps = {
@@ -95,6 +97,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
 	searchPosts,
+	showLoader,
 };
 
 export default withRouter(

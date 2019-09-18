@@ -8,10 +8,36 @@ class Nav extends Component {
 		this.openSearchLayout = this.openSearchLayout.bind(this);
 	}
 
-	openSearchLayout() {
+	openSearchLayout(event) {
+		event.preventDefault();
+
 		document.body.classList.add("overflow-hidden");
 		document.getElementById("searchEngine").classList.add("d-flex");
 		document.getElementById("searchBox").focus();
+	}
+
+	componentDidMount() {
+		var lastScrollTop = 0;
+
+		document.addEventListener(
+			"scroll",
+			function() {
+				let st = window.pageYOffset || document.documentElement.scrollTop;
+
+				let navbar = document.getElementById("mainNav");
+				let heightOfNavbar = document.getElementById("mainNav").offsetHeight;
+
+				if (st < lastScrollTop) {
+					if (st === 0) {
+						navbar.classList.remove("is-fixed", "is-visible");
+					} else navbar.classList.add("is-visible");
+				} else if (st > heightOfNavbar) {
+					navbar.classList.add("is-fixed");
+					navbar.classList.remove("is-visible");
+				}
+			},
+			false
+		);
 	}
 
 	render() {
@@ -50,9 +76,9 @@ class Nav extends Component {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<div className="cursor-pointer text-white" onClick={this.openSearchLayout}>
+								<Link className="nav-link" to="/" onClick={this.openSearchLayout}>
 									<i className="fas fa-search" title="Search" />
-								</div>
+								</Link>
 							</li>
 						</ul>
 					</div>
