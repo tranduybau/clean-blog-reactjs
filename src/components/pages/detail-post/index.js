@@ -17,12 +17,12 @@ class DetailPost extends Component {
 	}
 
 	componentDidMount() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+
 		const { postId } = this.props.match.params;
 		this.props.showLoader();
 		this.props.showOnePost(postId);
-
-		document.body.scrollTop = 0;
-		document.documentElement.scrollTop = 0;
 	}
 
 	/* RENDER */

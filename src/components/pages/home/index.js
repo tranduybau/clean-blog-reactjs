@@ -18,6 +18,9 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+
 		this.props.showLoader();
 		this.props.showPosts();
 		this.props.clearInfoPost();
