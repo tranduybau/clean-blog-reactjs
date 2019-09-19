@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { showPosts, clearInfoPost, showLoader } from "dispatchers";
 
 import ArticleItem from "../../shared/ArticleItem/index";
-import Loader from "../../shared/Loader/index";
 
 class Home extends Component {
 	constructor(props) {
@@ -28,33 +27,31 @@ class Home extends Component {
 
 	/* RENDER */
 	render() {
-		const { posts, isLoading } = this.props.post;
+		const { posts } = this.props.post;
 
-		if (!isLoading)
-			return (
-				<div className="container">
-					<div className="row">
-						<div className="col-lg-8 col-md-10 mx-auto">
-							<div className="clearfix">
-								{posts.length > 0
-									? posts.map((item, index) => (
-											<div key={index}>
-												<ArticleItem item={item} />
-												{index + 1 < posts.length ? <hr /> : ""}
-											</div>
-									  ))
-									: "Không có bài nào á"}
-								<div className="d-none">
-									<Link className="btn btn-primary ml-auto" to="#">
-										Older Posts &rarr;
-									</Link>
-								</div>
+		return (
+			<div className="container">
+				<div className="row">
+					<div className="col-lg-8 col-md-10 mx-auto">
+						<div className="clearfix">
+							{posts.length > 0
+								? posts.map((item, index) => (
+										<div key={index}>
+											<ArticleItem item={item} />
+											{index + 1 < posts.length ? <hr /> : ""}
+										</div>
+								  ))
+								: "Không có bài nào á"}
+							<div className="d-none">
+								<Link className="btn btn-primary ml-auto" to="#">
+									Older Posts &rarr;
+								</Link>
 							</div>
 						</div>
 					</div>
 				</div>
-			);
-		return <Loader />;
+			</div>
+		);
 	}
 }
 

@@ -70,3 +70,7 @@
 .box-shadow-none {
 	box-shadow: none !important
 }
+
+.loader--background {
+	background-color: #ffde54;
+}

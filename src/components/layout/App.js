@@ -5,6 +5,7 @@ import Header from "./header";
 import Main from "./main";
 import Footer from "./footer";
 import Seacher from "../shared/Searcher/index";
+import Loader from "../shared/Loader";
 
 class App extends Component {
 	render() {
@@ -16,6 +17,7 @@ class App extends Component {
 				<hr />
 				<Footer />
 				<Seacher />
+				<Loader />
 			</div>
 		);
 	}

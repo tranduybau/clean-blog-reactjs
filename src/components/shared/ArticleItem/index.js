@@ -25,10 +25,10 @@ class ArticleItem extends Component {
 					/>
 				</Link>
 				<p className="post-meta ">
-					Premiered at <b>{item.show.premiered}</b>, click{" "}
+					Premiered at <b>{item.show.premiered}</b>, click
 					<a
 						target="_blank"
-						className="text-dark text-decoration-none"
+						className="text-dark text-decoration-none mx-1"
 						rel="noopener noreferrer"
 						href={`${item.show.url}`}>
 						here
