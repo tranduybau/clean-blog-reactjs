@@ -12,7 +12,7 @@ class Header extends Component {
 	}
 
 	headerStyle = post => {
-		return `url('${post && post.image ? post.image.original : "/img/home-bg.jpg"}')`;
+		return `url('${post.image ? post.image.original : "/img/home-bg.jpg"}')`;
 	};
 
 	render() {

@@ -35,7 +35,7 @@ export const showOnePost = id => {
 	return dispatch => {
 		dispatch(getDetailOfOnePost());
 		axios
-			.get(`http://api.tvmaze.com/shows/${id}`)
+			.get(`https://api.tvmaze.com/shows/${id}`)
 			.then(res => {
 				dispatch(getDetailOfOnePostSuccessed(res.data));
 			})

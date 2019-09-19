@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { showOnePost } from "dispatchers";
+import { showOnePost, showLoader } from "dispatchers";
 
 import Tag from "../../shared/Tag/index";
 
@@ -16,12 +16,12 @@ class DetailPost extends Component {
 	}
 
 	componentDidMount() {
-		const { postId } = this.props.match.params;
-
-		this.props.showOnePost(postId);
-
 		document.body.scrollTop = 0;
 		document.documentElement.scrollTop = 0;
+
+		const { postId } = this.props.match.params;
+		this.props.showLoader();
+		this.props.showOnePost(postId);
 	}
 
 	/* RENDER */
@@ -38,7 +38,7 @@ class DetailPost extends Component {
 						/>
 						<div className="col-lg-8 col-md-10 mx-auto">
 							For more infomations, check
-							<a href={post.url} className="text-dark text-decoration-none">
+							<a href={post.url} className="text-dark text-decoration-none mx-1">
 								TVMAZE
 							</a>
 						</div>
@@ -62,6 +62,7 @@ class DetailPost extends Component {
 DetailPost.proTypes = {
 	showOnePost: PropTypes.func.isRequired,
 	post: PropTypes.array,
+	showLoader: PropTypes.func.isRequired,
 };
 
 DetailPost.defaultProps = {
@@ -76,6 +77,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
 	showOnePost,
+	showLoader,
 };
 
 export default connect(
