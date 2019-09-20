@@ -38,7 +38,7 @@ class Searcher extends Component {
 	render() {
 		return (
 			<div
-				className="align-items-center justify-content-center position-absolute top-0 left-0 w-100 h-100 pp-bg-cl z-index-1900 container-fluid d-none transition-normal"
+				className="align-items-center justify-content-center position-fixed top-0 left-0 w-100 h-100 pp-bg-cl z-index-1900 container-fluid d-none transition-normal"
 				id="searchEngine">
 				<div
 					className="z-index-1901 position-absolute w-100 h-100"
