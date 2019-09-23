@@ -13,7 +13,41 @@ class Home extends Component {
 
 		this.state = {
 			post: {},
+			page: 1,
 		};
+
+		this.getNewerArticles = this.getNewerArticles.bind(this);
+		this.getOlderArticles = this.getOlderArticles.bind(this);
+	}
+
+	goToTop() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+
+	getOlderArticles() {
+		let currentPage = this.state.page + 1;
+
+		console.log(currentPage);
+
+		this.setState({
+			page: currentPage,
+		});
+
+		this.props.showPosts(currentPage);
+		this.goToTop();
+	}
+	getNewerArticles() {
+		let currentPage = this.state.page - 1;
+
+		console.log(currentPage);
+
+		this.setState({
+			page: currentPage,
+		});
+
+		this.props.showPosts(currentPage);
+		this.goToTop();
 	}
 
 	componentDidMount() {
@@ -21,8 +55,9 @@ class Home extends Component {
 		document.documentElement.scrollTop = 0;
 
 		this.props.showLoader();
-		this.props.showPosts();
+		this.props.showPosts(this.state.page);
 		this.props.clearInfoPost();
+		this.goToTop();
 	}
 
 	/* RENDER */
@@ -42,8 +77,17 @@ class Home extends Component {
 										</div>
 								  ))
 								: "Không có bài nào á"}
-							<div className="d-none">
-								<Link className="btn btn-primary ml-auto" to="#">
+							<div className="d-flex align-items-center mt-4">
+								<Link
+									className={`btn btn-primary mr-auto ${this.state.page === 1 ? "d-none" : ""}`}
+									to="#"
+									onClick={this.getNewerArticles}>
+									&larr; Newer Posts
+								</Link>
+								<Link
+									className={`btn btn-primary ml-auto ${posts.length === 0 ? "d-none" : ""}`}
+									to="#"
+									onClick={this.getOlderArticles}>
 									Older Posts &rarr;
 								</Link>
 							</div>

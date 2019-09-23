@@ -20,11 +20,11 @@ import {
 	getAllCategoriesSuccessed,
 } from "../actions/actions";
 
-export const showPosts = () => {
+export const showPosts = page => {
 	return dispatch => {
 		dispatch(getDataOfAllPosts());
 		axios
-			.get("http://localhost:3000/articles")
+			.get(`http://localhost:3000/articles?_page=${page}`)
 			.then(res => {
 				dispatch(getDataOfAllPostsSuccessed(res.data));
 			})
