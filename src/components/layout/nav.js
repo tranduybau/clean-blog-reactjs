@@ -6,6 +6,7 @@ class Nav extends Component {
 		super(props);
 
 		this.openSearchLayout = this.openSearchLayout.bind(this);
+		this.openLoginLayout = this.openLoginLayout.bind(this);
 	}
 
 	openSearchLayout(event) {
@@ -14,6 +15,12 @@ class Nav extends Component {
 		document.body.classList.add("overflow-hidden");
 		document.getElementById("searchEngine").classList.add("d-flex");
 		document.getElementById("searchBox").focus();
+	}
+
+	openLoginLayout(event) {
+		event.preventDefault();
+
+		console.log("Lô");
 	}
 
 	componentDidMount() {
@@ -47,37 +54,16 @@ class Nav extends Component {
 					<Link className="navbar-brand" to="/">
 						HOME
 					</Link>
-					<button
-						className="navbar-toggler navbar-toggler-right"
-						type="button"
-						data-toggle="collapse"
-						data-target="#navbarResponsive"
-						aria-controls="navbarResponsive"
-						aria-expanded="false"
-						aria-label="Toggle navigation">
-						Menu
-						<i className="fas fa-bars" />
-					</button>
-					<div className="collapse navbar-collapse" id="navbarResponsive">
-						<ul className="navbar-nav ml-auto align-items-center">
-							<li className="nav-item">
-								<Link className="nav-link" to="/">
-									Home
-								</Link>
-							</li>
-							<li className="nav-item">
-								<Link className="nav-link" to="/about">
-									About
-								</Link>
-							</li>
-							<li className="nav-item">
-								<Link className="nav-link" to="/contact">
-									Contact
-								</Link>
-							</li>
-							<li className="nav-item">
+					<div className="d-flex justify-content-end align-items-center">
+						<ul className="navbar-nav ml-auto align-items-center flex-row">
+							<li className="nav-item mx-2">
 								<Link className="nav-link" to="/" onClick={this.openSearchLayout}>
 									<i className="fas fa-search" title="Search" />
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
+									Login
 								</Link>
 							</li>
 						</ul>

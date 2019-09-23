@@ -25,7 +25,7 @@ class Loader extends Component {
 
 		return (
 			<div
-				className={`position-fixed top-0 left-0 w-100 h-100 loader--background align-items-center justify-content-center ${
+				className={`position-fixed top-0 left-0 w-100 h-100 loader--background align-items-center justify-content-center z-index-1900 ${
 					isLoading ? "d-flex" : "d-none"
 				}`}>
 				<div className="container">
