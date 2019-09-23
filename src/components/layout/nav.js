@@ -49,24 +49,24 @@ class Nav extends Component {
 
 	render() {
 		return (
-			<nav className="navbar navbar-expand-lg fixed-top bg-transparent border-0" id="mainNav">
+			<nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 				<div className="container">
-					<Link className="navbar-brand text-white" to="/">
+					<Link className="navbar-brand" to="/">
 						HOME
 					</Link>
 					<div className="d-flex justify-content-end align-items-center">
-						<div className="d-flex align-items-center">
-							<div className="nav-item">
-								<Link className="nav-link text-white" to="/" onClick={this.openSearchLayout}>
+						<ul className="navbar-nav ml-auto align-items-center flex-row">
+							<li className="nav-item mx-2">
+								<Link className="nav-link" to="/" onClick={this.openSearchLayout}>
 									<i className="fas fa-search" title="Search" />
 								</Link>
-							</div>
-							<div className="nav-item">
-								<Link to="/" className="nav-link text-white" onClick={this.openLoginLayout}>
-									Login or Register
+							</li>
+							<li className="nav-item">
+								<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
+									Login
 								</Link>
-							</div>
-						</div>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</nav>
