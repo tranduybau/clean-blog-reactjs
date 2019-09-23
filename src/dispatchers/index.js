@@ -18,6 +18,11 @@ import {
 	getAllCategories,
 	getAllCategoriesFailed,
 	getAllCategoriesSuccessed,
+	pendingLogin,
+	loginFailed,
+	loginSuccessed,
+	openLoginBox,
+	closeLoginBox,
 } from "../actions/actions";
 
 export const showPosts = page => {
@@ -93,5 +98,29 @@ export const fetchAllCategories = () => {
 			.get("http://localhost:3000/categories")
 			.then(res => dispatch(getAllCategoriesSuccessed(res.data)))
 			.catch(error => dispatch(getAllCategoriesFailed(error)));
+	};
+};
+
+export const openLoginComponent = () => {
+	return dispatch => {
+		dispatch(openLoginBox());
+	};
+};
+
+export const closeLoginComponent = () => {
+	return dispatch => {
+		dispatch(closeLoginBox());
+	};
+};
+
+export const fetchUser = userInfo => {
+	return dispatch => {
+		dispatch(pendingLogin());
+		const isUserExist = axios.get(
+			`http://localhost:3000/users?email=${userInfo.email}&password=${userInfo.password}`
+		);
+
+		if (isUserExist.length) dispatch(loginSuccessed(isUserExist[0]));
+		else dispatch(loginFailed());
 	};
 };

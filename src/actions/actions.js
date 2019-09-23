@@ -16,6 +16,11 @@ import {
 	GET_ALL_CATEGORIES,
 	GET_ALL_CATEGORIES_FAILED,
 	GET_ALL_CATEGORIES_SUCCESSED,
+	OPEN_LOGIN_BOX,
+	CLOSE_LOGIN_BOX,
+	LOGIN_FAILED,
+	LOGIN_SUCCESSED,
+	PENDING_LOGIN,
 } from "../constants/actionTypes";
 
 export const getDataOfAllPosts = () => {
@@ -129,5 +134,38 @@ export const getAllCategoriesFailed = error => {
 	return {
 		type: GET_ALL_CATEGORIES_FAILED,
 		error,
+	};
+};
+
+// LOGIN
+export const openLoginBox = () => {
+	return {
+		type: OPEN_LOGIN_BOX,
+	};
+};
+
+export const closeLoginBox = () => {
+	return {
+		type: CLOSE_LOGIN_BOX,
+	};
+};
+
+export const pendingLogin = userInfo => {
+	return {
+		type: PENDING_LOGIN,
+		payload: userInfo,
+	};
+};
+
+export const loginSuccessed = userInfo => {
+	return {
+		type: LOGIN_SUCCESSED,
+		payload: userInfo,
+	};
+};
+
+export const loginFailed = () => {
+	return {
+		type: LOGIN_FAILED,
 	};
 };
