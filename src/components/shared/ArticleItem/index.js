@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class ArticleItem extends Component {
+	constructor(props) {
+		super(props);
+
+		this.shortHandDescription = this.shortHandDescription.bind(this);
+	}
+
 	shortHandDescription(Str) {
-		if (Str.length)
+		if (Str.length > 100)
 			if (Str[99] === " ") return `${Str.substring(3, 94)}...`;
 			else return `${Str.substring(3, 95)}...`;
 		return Str;
@@ -15,25 +21,23 @@ class ArticleItem extends Component {
 
 		return (
 			<div className="post-preview">
-				<Link to={`/detail-post/${item.show.id}`}>
-					<h2 className="post-title">{item.show.name}</h2>
+				<Link to={`/detail-post/${item.id}`}>
+					<h2 className="post-title">{item.title}</h2>
 					<h3
 						className="post-subtitle"
 						dangerouslySetInnerHTML={{
-							__html: this.shortHandDescription(item.show.summary ? item.show.summary : ""),
+							__html: this.shortHandDescription(item.description ? item.description : ""),
 						}}
 					/>
 				</Link>
 				<p className="post-meta ">
-					Premiered at <b>{item.show.premiered}</b>, click
-					<a
-						target="_blank"
-						className="text-dark text-decoration-none mx-1"
-						rel="noopener noreferrer"
-						href={`${item.show.url}`}>
-						here
-					</a>
-					for more infomations.
+					Premiered at{" "}
+					<b>
+						{Date(item.createdAt)
+							.substring(0, 15)
+							.trim()}
+					</b>
+					, by {item.author.name}
 				</p>
 			</div>
 		);

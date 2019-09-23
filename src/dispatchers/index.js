@@ -15,13 +15,16 @@ import {
 	searchPostsByKeyword,
 	searchPostsByKeywordSuccess,
 	searchPostsByKeywordFailed,
+	getAllCategories,
+	getAllCategoriesFailed,
+	getAllCategoriesSuccessed,
 } from "../actions/actions";
 
 export const showPosts = () => {
 	return dispatch => {
 		dispatch(getDataOfAllPosts());
 		axios
-			.get("https://api.tvmaze.com/search/shows?q=batman")
+			.get("http://localhost:3000/articles")
 			.then(res => {
 				dispatch(getDataOfAllPostsSuccessed(res.data));
 			})
@@ -35,7 +38,7 @@ export const showOnePost = id => {
 	return dispatch => {
 		dispatch(getDetailOfOnePost());
 		axios
-			.get(`https://api.tvmaze.com/shows/${id}`)
+			.get(`http://localhost:3000/articles/${id}`)
 			.then(res => {
 				dispatch(getDetailOfOnePostSuccessed(res.data));
 			})
@@ -79,5 +82,16 @@ export const searchPosts = keyword => {
 			.get(`https://api.tvmaze.com/search/shows?q=${keyword}`)
 			.then(res => dispatch(searchPostsByKeywordSuccess(res.data)))
 			.catch(error => dispatch(searchPostsByKeywordFailed(error)));
+	};
+};
+
+//  get categhories
+export const fetchAllCategories = () => {
+	return dispatch => {
+		dispatch(getAllCategories());
+		axios
+			.get("http://localhost:3000/categories")
+			.then(res => dispatch(getAllCategoriesSuccessed(res.data)))
+			.catch(error => dispatch(getAllCategoriesFailed(error)));
 	};
 };

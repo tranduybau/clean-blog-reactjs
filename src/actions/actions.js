@@ -13,6 +13,9 @@ import {
 	SEARCH_POSTS_BY_KEYWORD,
 	SEARCH_POSTS_BY_KEYWORD_SUCCESS,
 	SEARCH_POSTS_BY_KEYWORD_FAILED,
+	GET_ALL_CATEGORIES,
+	GET_ALL_CATEGORIES_FAILED,
+	GET_ALL_CATEGORIES_SUCCESSED,
 } from "../constants/actionTypes";
 
 export const getDataOfAllPosts = () => {
@@ -104,6 +107,27 @@ export const searchPostsByKeywordSuccess = data => {
 export const searchPostsByKeywordFailed = error => {
 	return {
 		type: SEARCH_POSTS_BY_KEYWORD_FAILED,
+		error,
+	};
+};
+
+// get categories
+export const getAllCategories = () => {
+	return {
+		type: GET_ALL_CATEGORIES,
+	};
+};
+
+export const getAllCategoriesSuccessed = data => {
+	return {
+		type: GET_ALL_CATEGORIES_SUCCESSED,
+		payload: data,
+	};
+};
+
+export const getAllCategoriesFailed = error => {
+	return {
+		type: GET_ALL_CATEGORIES_FAILED,
 		error,
 	};
 };
