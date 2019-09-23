@@ -49,9 +49,9 @@ class Nav extends Component {
 
 	render() {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+			<nav className="navbar navbar-expand-lg fixed-top bg-transparent border-0" id="mainNav">
 				<div className="container">
-					<Link className="navbar-brand" to="/">
+					<Link className="navbar-brand text-white" to="/">
 						HOME
 					</Link>
 					<div className="d-flex justify-content-end align-items-center">
