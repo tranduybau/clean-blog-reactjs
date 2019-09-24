@@ -56,6 +56,10 @@ class Home extends Component {
 		this.goToTop();
 	}
 
+	componentDidUpdate() {
+		console.log("1");
+	}
+
 	/* RENDER */
 	render() {
 		const { posts } = this.props.post;
