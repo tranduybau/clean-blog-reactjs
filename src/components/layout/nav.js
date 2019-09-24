@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 class Nav extends Component {
 	constructor(props) {
@@ -7,6 +9,10 @@ class Nav extends Component {
 
 		this.openSearchLayout = this.openSearchLayout.bind(this);
 		this.openLoginLayout = this.openLoginLayout.bind(this);
+
+		this.state = {
+			userInfo: {},
+		};
 	}
 
 	openSearchLayout(event) {
@@ -20,7 +26,12 @@ class Nav extends Component {
 	openLoginLayout(event) {
 		event.preventDefault();
 
-		console.log("Lô");
+		document.getElementById("loginPage").classList.toggle("opacity-0");
+		document.getElementById("loginPage").classList.toggle("z-index-1900");
+	}
+
+	openUserNavi(event) {
+		event.preventDefault();
 	}
 
 	componentDidMount() {
@@ -62,9 +73,15 @@ class Nav extends Component {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
-									Login
-								</Link>
+								{this.props.userInfo.user.name ? (
+									<Link to="/" className="nav-link" onClick={this.openUserNavi}>
+										Hello, {this.props.userInfo.user.name}
+									</Link>
+								) : (
+									<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
+										Login
+									</Link>
+								)}
 							</li>
 						</ul>
 					</div>
@@ -74,4 +91,23 @@ class Nav extends Component {
 	}
 }
 
-export default Nav;
+Nav.propTypes = {
+	userInfo: PropTypes.object,
+};
+
+Nav.defaultProps = {
+	userInfo: {},
+};
+
+const mapStateToProps = state => {
+	return {
+		userInfo: state.user,
+	};
+};
+
+const mapDispatchToProps = {};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Nav);

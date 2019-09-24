@@ -23,12 +23,14 @@ export default function(state = initialState, action) {
 		case LOGIN_SUCCESSED:
 			return Object.assign({}, state, {
 				isLoadingUserInfo: false,
+				loginFailed: false,
 				user: action.payload,
 			});
 
 		case LOGIN_FAILED:
 			return Object.assign({}, state, {
 				isLoadingUserInfo: false,
+				loginFailed: true,
 			});
 
 		case OPEN_LOGIN_BOX: {

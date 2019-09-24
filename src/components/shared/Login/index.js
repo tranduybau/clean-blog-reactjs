@@ -18,6 +18,7 @@ class Login extends Component {
 		this.setToLogin = this.setToLogin.bind(this);
 		this.setToRegister = this.setToRegister.bind(this);
 		this.checkAuthen = this.checkAuthen.bind(this);
+		this.closeLoginSite = this.closeLoginSite.bind(this);
 
 		this.email = React.createRef();
 		this.password = React.createRef();
@@ -46,15 +47,25 @@ class Login extends Component {
 				password: this.password.current.value,
 			});
 		}
+
+		this.closeLoginSite();
+	}
+
+	closeLoginSite() {
+		document.getElementById("loginPage").classList.toggle("opacity-0");
+		document.getElementById("loginPage").classList.toggle("z-index-1900");
 	}
 
 	render() {
 		return (
-			<div className="position-fixed w-100 h-100 top-0 left-0 z-index-1900">
+			<div
+				className="position-fixed w-100 h-100 top-0 left-0 z-index--100 transition-normal opacity-0"
+				id="loginPage">
 				<div className="d-flex w-100 align-items-center justify-content-center h-100 position-relative">
 					<div
 						className="position-absolute w-100 h-100 bg-secondary"
 						title="Click here to go back"
+						onClick={this.closeLoginSite}
 					/>
 					<div
 						className="rounded overflow-hidden bg-white position-relative z-index-1901 transition-normal"
@@ -77,6 +88,12 @@ class Login extends Component {
 								</div>
 							</div>
 							<div className="p-3">
+								<small
+									className={`alert alert-danger ${
+										this.props.userInfo.loginFailed && this.state.isLogin ? "d-block" : "d-none"
+									}`}>
+									Wrong Username or Password
+								</small>
 								<div>
 									<input
 										type="text"

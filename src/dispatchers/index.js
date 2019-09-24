@@ -120,8 +120,6 @@ export const fetchUser = userInfo => {
 			`http://localhost:3000/users?email=${userInfo.email}&password=${userInfo.password}`
 		);
 
-		console.log(isUserExist.data[0]);
-
 		if (isUserExist.data.length === 1) dispatch(loginSuccessed(isUserExist.data[0]));
 		else dispatch(loginFailed({ error: "wrong username or password" }));
 	};

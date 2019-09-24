@@ -28,8 +28,6 @@ class Home extends Component {
 	getOlderArticles() {
 		let currentPage = this.state.page + 1;
 
-		console.log(currentPage);
-
 		this.setState({
 			page: currentPage,
 		});
@@ -39,8 +37,6 @@ class Home extends Component {
 	}
 	getNewerArticles() {
 		let currentPage = this.state.page - 1;
-
-		console.log(currentPage);
 
 		this.setState({
 			page: currentPage,
