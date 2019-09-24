@@ -27,3 +27,5 @@ export const CLOSE_LOGIN_BOX = "CLOSE_LOGIN_BOX";
 export const PENDING_LOGIN = "PENDING_LOGIN";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 export const LOGIN_SUCCESSED = "LOGIN_SUCCESSED";
+
+export const LOGOUT = "LOGOUT";

@@ -21,6 +21,7 @@ import {
 	LOGIN_FAILED,
 	LOGIN_SUCCESSED,
 	PENDING_LOGIN,
+	LOGOUT,
 } from "../constants/actionTypes";
 
 export const getDataOfAllPosts = () => {
@@ -166,5 +167,12 @@ export const loginSuccessed = userInfo => {
 export const loginFailed = () => {
 	return {
 		type: LOGIN_FAILED,
+	};
+};
+
+// LOGOUT
+export const logOut = () => {
+	return {
+		type: LOGOUT,
 	};
 };

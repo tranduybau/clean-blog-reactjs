@@ -4,6 +4,7 @@ import {
 	OPEN_LOGIN_BOX,
 	LOGIN_SUCCESSED,
 	LOGIN_FAILED,
+	LOGOUT,
 } from "../constants/actionTypes";
 
 var initialState = {
@@ -37,6 +38,11 @@ export default function(state = initialState, action) {
 		case CLOSE_LOGIN_BOX:
 			return Object.assign({}, state, {
 				isLoginBoxOpened: false,
+			});
+
+		case LOGOUT:
+			return Object.assign({}, state, {
+				user: {},
 			});
 
 		default:

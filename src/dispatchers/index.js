@@ -23,6 +23,7 @@ import {
 	loginSuccessed,
 	openLoginBox,
 	closeLoginBox,
+	logOut,
 } from "../actions/actions";
 
 export const showPosts = page => {
@@ -127,5 +128,12 @@ export const fetchUser = userInfo => {
 
 			dispatch(loginSuccessed(isUserExist.data[0]));
 		} else dispatch(loginFailed({ error: "wrong username or password" }));
+	};
+};
+
+export const logOutAccount = () => {
+	return dispatch => {
+		localStorage.removeItem("userInfo");
+		dispatch(logOut());
 	};
 };

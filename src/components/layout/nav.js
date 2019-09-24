@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { openLoginComponent } from "dispatchers";
+import { openLoginComponent, logOutAccount } from "dispatchers";
 
 class Nav extends Component {
 	constructor(props) {
@@ -11,6 +11,7 @@ class Nav extends Component {
 
 		this.openSearchLayout = this.openSearchLayout.bind(this);
 		this.openLoginLayout = this.openLoginLayout.bind(this);
+		this.logOut = this.logOut.bind(this);
 
 		this.state = {
 			userInfo: {},
@@ -29,6 +30,11 @@ class Nav extends Component {
 		event.preventDefault();
 
 		this.props.openLoginComponent();
+	}
+
+	logOut() {
+		// this.props.userInfo;
+		this.props.logOutAccount();
 	}
 
 	componentDidMount() {
@@ -99,7 +105,7 @@ class Nav extends Component {
 											<Link to="" className="dropdown-item">
 												Manage Users
 											</Link>
-											<Link to="" className="dropdown-item">
+											<Link to="" className="dropdown-item" onClick={this.logOut}>
 												Logout
 											</Link>
 										</div>
@@ -120,6 +126,7 @@ class Nav extends Component {
 
 Nav.propTypes = {
 	userInfo: PropTypes.object,
+	logOutAccount: PropTypes.func.isRequired,
 	openLoginComponent: PropTypes.func.isRequired,
 };
 
@@ -133,7 +140,7 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = { openLoginComponent };
+const mapDispatchToProps = { openLoginComponent, logOutAccount };
 
 export default connect(
 	mapStateToProps,
