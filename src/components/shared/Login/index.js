@@ -46,6 +46,7 @@ class Login extends Component {
 			this.props.fetchUser({
 				email: this.email.current.value,
 				password: this.password.current.value,
+				checked: this.saveMyAccount.current.checked,
 			});
 		}
 	}

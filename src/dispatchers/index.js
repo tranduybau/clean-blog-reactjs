@@ -115,7 +115,7 @@ export const closeLoginComponent = () => {
 
 export const fetchUser = userInfo => {
 	return async dispatch => {
-		const { email, password } = userInfo;
+		const { email, password, checked } = userInfo;
 
 		dispatch(pendingLogin());
 		const isUserExist = await axios.get(
@@ -123,7 +123,8 @@ export const fetchUser = userInfo => {
 		);
 
 		if (isUserExist.data.length === 1) {
-			localStorage.setItem("userInfo", JSON.stringify({ email, password }));
+			if (checked) localStorage.setItem("userInfo", JSON.stringify({ email, password }));
+
 			dispatch(loginSuccessed(isUserExist.data[0]));
 		} else dispatch(loginFailed({ error: "wrong username or password" }));
 	};
