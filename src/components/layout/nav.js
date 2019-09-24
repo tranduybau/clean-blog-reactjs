@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import { openLoginComponent } from "dispatchers";
+
 class Nav extends Component {
 	constructor(props) {
 		super(props);
@@ -26,12 +28,7 @@ class Nav extends Component {
 	openLoginLayout(event) {
 		event.preventDefault();
 
-		document.getElementById("loginPage").classList.toggle("opacity-0");
-		document.getElementById("loginPage").classList.toggle("z-index-1900");
-	}
-
-	openUserNavi(event) {
-		event.preventDefault();
+		this.props.openLoginComponent();
 	}
 
 	componentDidMount() {
@@ -74,9 +71,39 @@ class Nav extends Component {
 							</li>
 							<li className="nav-item">
 								{this.props.userInfo.user.name ? (
-									<Link to="/" className="nav-link" onClick={this.openUserNavi}>
-										Hello, {this.props.userInfo.user.name}
-									</Link>
+									<div className="dropdown">
+										<Link
+											to="/"
+											className="border-0 p-0 box-shadow-none bg-transparent nav-link text-white"
+											id="dropdownMenuLink"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false">
+											Hello {this.props.userInfo.user.name}
+										</Link>
+										<div
+											className="dropdown-menu right-0 left-auto"
+											aria-labelledby="dropdownMenuLink">
+											<Link to="" className="dropdown-item">
+												Create A New Article
+											</Link>
+											<Link to="" className="dropdown-item">
+												Manage Articles
+											</Link>
+											<Link to="" className="dropdown-item">
+												Create A New Category
+											</Link>
+											<Link to="" className="dropdown-item">
+												Manage Categories
+											</Link>
+											<Link to="" className="dropdown-item">
+												Manage Users
+											</Link>
+											<Link to="" className="dropdown-item">
+												Logout
+											</Link>
+										</div>
+									</div>
 								) : (
 									<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
 										Login
@@ -93,6 +120,7 @@ class Nav extends Component {
 
 Nav.propTypes = {
 	userInfo: PropTypes.object,
+	openLoginComponent: PropTypes.func.isRequired,
 };
 
 Nav.defaultProps = {
@@ -105,7 +133,7 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { openLoginComponent };
 
 export default connect(
 	mapStateToProps,

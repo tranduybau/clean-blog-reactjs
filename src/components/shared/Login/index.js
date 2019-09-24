@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { fetchUser } from "dispatchers";
+import { fetchUser, closeLoginComponent } from "dispatchers";
 
 class Login extends Component {
 	constructor(props) {
@@ -47,19 +47,22 @@ class Login extends Component {
 				password: this.password.current.value,
 			});
 		}
-
-		this.closeLoginSite();
 	}
 
 	closeLoginSite() {
-		document.getElementById("loginPage").classList.toggle("opacity-0");
-		document.getElementById("loginPage").classList.toggle("z-index-1900");
+		this.props.closeLoginComponent();
 	}
 
 	render() {
+		console.log(this.props.userInfo.user.name);
+
 		return (
 			<div
-				className="position-fixed w-100 h-100 top-0 left-0 z-index--100 transition-normal opacity-0"
+				className={`position-fixed w-100 h-100 top-0 left-0 z-index--100 transition-normal  ${
+					this.props.userInfo.isLoginBoxOpened && !this.props.userInfo.user.name
+						? "z-index-1901"
+						: "opacity-0"
+				}`}
 				id="loginPage">
 				<div className="d-flex w-100 align-items-center justify-content-center h-100 position-relative">
 					<div
@@ -153,6 +156,7 @@ class Login extends Component {
 Login.propTypes = {
 	fetchUser: PropTypes.func.isRequired,
 	userInfo: PropTypes.object,
+	closeLoginComponent: PropTypes.func.isRequired,
 };
 
 Login.defaultProps = {
@@ -167,6 +171,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
 	fetchUser,
+	closeLoginComponent,
 };
 
 export default connect(

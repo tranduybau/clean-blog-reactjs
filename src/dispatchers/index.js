@@ -84,7 +84,7 @@ export const searchPosts = keyword => {
 	return dispatch => {
 		dispatch(searchPostsByKeyword());
 		axios
-			.get(`https://api.tvmaze.com/search/shows?q=${keyword}`)
+			.get(`https://api.tvmaze.com/search/shows/posts?title=${keyword}`)
 			.then(res => dispatch(searchPostsByKeywordSuccess(res.data)))
 			.catch(error => dispatch(searchPostsByKeywordFailed(error)));
 	};
