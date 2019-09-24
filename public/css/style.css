@@ -74,3 +74,8 @@
 .loader--background {
 	background-color: #ffde54;
 }
+
+#loginSite {
+	max-width: 420px;
+	width: 100%;
+}

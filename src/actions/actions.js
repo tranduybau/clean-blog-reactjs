@@ -150,10 +150,9 @@ export const closeLoginBox = () => {
 	};
 };
 
-export const pendingLogin = userInfo => {
+export const pendingLogin = () => {
 	return {
 		type: PENDING_LOGIN,
-		payload: userInfo,
 	};
 };
 

@@ -114,13 +114,15 @@ export const closeLoginComponent = () => {
 };
 
 export const fetchUser = userInfo => {
-	return dispatch => {
+	return async dispatch => {
 		dispatch(pendingLogin());
-		const isUserExist = axios.get(
+		const isUserExist = await axios.get(
 			`http://localhost:3000/users?email=${userInfo.email}&password=${userInfo.password}`
 		);
 
-		if (isUserExist.length) dispatch(loginSuccessed(isUserExist[0]));
-		else dispatch(loginFailed());
+		console.log(isUserExist.data[0]);
+
+		if (isUserExist.data.length === 1) dispatch(loginSuccessed(isUserExist.data[0]));
+		else dispatch(loginFailed({ error: "wrong username or password" }));
 	};
 };
