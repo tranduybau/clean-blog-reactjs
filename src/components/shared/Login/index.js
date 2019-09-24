@@ -24,6 +24,7 @@ class Login extends Component {
 		this.password = React.createRef();
 		this.name = React.createRef();
 		this.avatar = React.createRef();
+		this.saveMyAccount = React.createRef();
 	}
 
 	setToLogin() {
@@ -53,17 +54,21 @@ class Login extends Component {
 		this.props.closeLoginComponent();
 	}
 
-	render() {
-		console.log(this.props.userInfo.user.name);
+	componentDidMount() {
+		if (localStorage.getItem("userInfo")) {
+			const { email, password } = JSON.parse(localStorage.getItem("userInfo"));
+			this.props.fetchUser({ email, password });
+		}
+	}
 
+	render() {
 		return (
 			<div
 				className={`position-fixed w-100 h-100 top-0 left-0 z-index--100 transition-normal  ${
 					this.props.userInfo.isLoginBoxOpened && !this.props.userInfo.user.name
 						? "z-index-1901"
 						: "opacity-0"
-				}`}
-				id="loginPage">
+				}`}>
 				<div className="d-flex w-100 align-items-center justify-content-center h-100 position-relative">
 					<div
 						className="position-absolute w-100 h-100 bg-secondary"
@@ -115,7 +120,12 @@ class Login extends Component {
 									{this.state.isLogin ? (
 										<div>
 											<label htmlFor="rememberLogin">
-												<input type="checkbox" id="rememberLogin" className="p-1" />
+												<input
+													type="checkbox"
+													id="rememberLogin"
+													ref={this.saveMyAccount}
+													className="p-1"
+												/>
 												<small className="mx-1 mt-2">Remember me</small>
 											</label>
 										</div>

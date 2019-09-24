@@ -84,7 +84,7 @@ export const searchPosts = keyword => {
 	return dispatch => {
 		dispatch(searchPostsByKeyword());
 		axios
-			.get(`https://api.tvmaze.com/search/shows/posts?title=${keyword}`)
+			.get(`http://localhost:3000/articles?_page=${1}&title=${keyword}`)
 			.then(res => dispatch(searchPostsByKeywordSuccess(res.data)))
 			.catch(error => dispatch(searchPostsByKeywordFailed(error)));
 	};
@@ -115,12 +115,16 @@ export const closeLoginComponent = () => {
 
 export const fetchUser = userInfo => {
 	return async dispatch => {
+		const { email, password } = userInfo;
+
 		dispatch(pendingLogin());
 		const isUserExist = await axios.get(
-			`http://localhost:3000/users?email=${userInfo.email}&password=${userInfo.password}`
+			`http://localhost:3000/users?email=${email}&password=${password}`
 		);
 
-		if (isUserExist.data.length === 1) dispatch(loginSuccessed(isUserExist.data[0]));
-		else dispatch(loginFailed({ error: "wrong username or password" }));
+		if (isUserExist.data.length === 1) {
+			localStorage.setItem("userInfo", JSON.stringify({ email, password }));
+			dispatch(loginSuccessed(isUserExist.data[0]));
+		} else dispatch(loginFailed({ error: "wrong username or password" }));
 	};
 };
