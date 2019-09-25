@@ -12,7 +12,7 @@ class Header extends Component {
 	}
 
 	headerStyle = post => {
-		return `url('${post ? post.mastheadImage : "/img/home-bg.jpg"}')`;
+		return `url('${post.mastheadImage ? post.mastheadImage : "/img/home-bg.jpg"}')`;
 	};
 
 	render() {
@@ -25,7 +25,7 @@ class Header extends Component {
 					<div className="row">
 						<div className="col-lg-8 col-md-10 mx-auto">
 							<div className="site-heading">
-								<h1>{post ? post.title : "Blog"}</h1>
+								<h1>{post.title ? post.title : "Blog"}</h1>
 							</div>
 						</div>
 					</div>

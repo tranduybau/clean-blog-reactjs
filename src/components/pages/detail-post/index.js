@@ -17,10 +17,20 @@ class DetailPost extends Component {
 
 	componentDidMount() {
 		const { postId } = this.props.match.params;
-
 		this.goToTop();
 		this.props.showLoader();
 		this.props.showOnePost(postId);
+
+		window.onscroll = function() {
+			let positionDefaultOfArticleFeatureTable =
+				document.getElementsByName("header").offsetTop + 64;
+
+			if (window.pageYOffset >= positionDefaultOfArticleFeatureTable) {
+				document.getElementById("articleFeature").classList.add("position-fixed");
+			} else {
+				document.getElementById("articleFeature").classList.remove("position-fixed");
+			}
+		};
 	}
 
 	goToTop() {
@@ -44,12 +54,12 @@ class DetailPost extends Component {
 							<div className="col-lg-10 my-4 mx-auto">
 								<img src={post.mastheadImage} alt="" className="w-100" />
 							</div>
-							<div className="position-absolute right-0 top-0 mt-5">
+							<div className="position-absolute right-0 top-0 mt-5" id="articleFeature">
 								<div>
 									<div className="d-flex align-items-center justify-content-center flex-column article-item__feature__rate-point">
 										<div className="d-flex align-items-center">
-											<i className="far fa-eye mr-1"></i>
-											<small className="text-left">{post.rate.point}</small>
+											<i className="far fa-comment mr-1"></i>
+											<small className="text-left">{post.comments.amount}</small>
 										</div>
 										<div className="d-flex w-100 ml-auto">
 											<div className="d-flex flex-column justify-content-center align-items-center flex-grow-1 mr-1 mt-n1">

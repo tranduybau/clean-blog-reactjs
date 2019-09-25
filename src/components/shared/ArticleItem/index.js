@@ -66,8 +66,8 @@ class ArticleItem extends Component {
 					}`}>
 					<div className="h-100 d-flex align-items-center justify-content-center flex-column article-item__feature__rate-point">
 						<div className="d-flex align-items-center">
-							<i className="far fa-eye mr-1"></i>
-							<small className="text-left">{item.rate.point}</small>
+							<i className="far fa-comment mr-1"></i>
+							<small className="text-left">{item.comments.amount}</small>
 						</div>
 						<div className="d-flex w-100 ml-auto">
 							<div className="d-flex flex-column justify-content-center align-items-center flex-grow-1 mr-1 mt-n1">
