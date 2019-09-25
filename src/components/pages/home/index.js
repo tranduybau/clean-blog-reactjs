@@ -14,10 +14,11 @@ class Home extends Component {
 		this.state = {
 			post: {},
 			page: 1,
+			isLoadingArticles: false,
 		};
 
-		this.getNewerArticles = this.getNewerArticles.bind(this);
-		this.getOlderArticles = this.getOlderArticles.bind(this);
+		this.paginator = this.paginator.bind(this);
+		this.goToTop = this.goToTop.bind(this);
 	}
 
 	goToTop() {
@@ -25,40 +26,26 @@ class Home extends Component {
 		document.documentElement.scrollTop = 0;
 	}
 
-	getOlderArticles() {
-		let currentPage = this.state.page + 1;
+	paginator(number) {
+		let currentPage = this.state.page;
+
+		this.props.showPosts(currentPage + number);
+		this.goToTop();
+		this.props.showLoader();
 
 		this.setState({
-			page: currentPage,
+			page: currentPage + number,
 		});
-
-		this.props.showPosts(currentPage);
-		this.goToTop();
-	}
-	getNewerArticles() {
-		let currentPage = this.state.page - 1;
-
-		this.setState({
-			page: currentPage,
-		});
-
-		this.props.showPosts(currentPage);
-		this.goToTop();
 	}
 
 	componentDidMount() {
-		document.body.scrollTop = 0;
-		document.documentElement.scrollTop = 0;
-
 		this.props.showLoader();
 		this.props.showPosts(this.state.page);
 		this.props.clearInfoPost();
 		this.goToTop();
 	}
 
-	componentDidUpdate() {
-		console.log("1");
-	}
+	componentDidUpdate() {}
 
 	/* RENDER */
 	render() {
@@ -81,13 +68,13 @@ class Home extends Component {
 								<Link
 									className={`btn btn-primary mr-auto ${this.state.page === 1 ? "d-none" : ""}`}
 									to="#"
-									onClick={this.getNewerArticles}>
+									onClick={() => this.paginator(-1)}>
 									&larr; Newer Posts
 								</Link>
 								<Link
 									className={`btn btn-primary ml-auto ${posts.length === 0 ? "d-none" : ""}`}
 									to="#"
-									onClick={this.getOlderArticles}>
+									onClick={() => this.paginator(1)}>
 									Older Posts &rarr;
 								</Link>
 							</div>

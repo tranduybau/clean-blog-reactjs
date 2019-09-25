@@ -31,7 +31,7 @@ class ArticleItem extends Component {
 					/>
 				</Link>
 				<p className="post-meta ">
-					Premiered at{" "}
+					Posted at{" "}
 					<b>
 						{Date(item.createdAt)
 							.substring(0, 15)

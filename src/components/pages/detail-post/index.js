@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 
 import { showOnePost, showLoader } from "dispatchers";
 
-// import Tag from "../../shared/Tag/index";
-
 class DetailPost extends Component {
 	constructor(props) {
 		super(props);
@@ -40,19 +38,6 @@ class DetailPost extends Component {
 							<img src={post.mastheadImage ? post.mastheadImage : ""} alt="" className="w-100" />
 						</div>
 					</div>
-					{/* <div className="col-lg-8 col-md-10 mx-auto mb-3 mb-md-5 d-flex flex-wrap">
-						<div className="mx-n3 w-100">
-							{post.categories
-								? () => {
-										for (const key in post.categories) {
-											if (post.categories.hasOwnProperty(key)) {
-												return <Tag key={key} content={key.name} />;
-											}
-										}
-								  }
-								: ""}
-						</div>
-					</div> */}
 				</div>
 			</article>
 		);

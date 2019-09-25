@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { openLoginComponent, logOutAccount } from "dispatchers";
+import { openLoginComponent, logOutAccount, showPosts, showLoader } from "dispatchers";
 
 class Nav extends Component {
 	constructor(props) {
@@ -12,10 +12,23 @@ class Nav extends Component {
 		this.openSearchLayout = this.openSearchLayout.bind(this);
 		this.openLoginLayout = this.openLoginLayout.bind(this);
 		this.logOut = this.logOut.bind(this);
+		this.goToTop = this.goToTop.bind(this);
+		this.backToNewersArticles = this.backToNewersArticles.bind(this);
 
 		this.state = {
 			userInfo: {},
 		};
+	}
+
+	goToTop() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+
+	backToNewersArticles() {
+		this.props.showPosts(1);
+		this.goToTop();
+		this.props.showLoader();
 	}
 
 	openSearchLayout(event) {
@@ -33,7 +46,6 @@ class Nav extends Component {
 	}
 
 	logOut() {
-		// this.props.userInfo;
 		this.props.logOutAccount();
 	}
 
@@ -65,7 +77,7 @@ class Nav extends Component {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 				<div className="container">
-					<Link className="navbar-brand" to="/">
+					<Link className="navbar-brand" to="/" onClick={this.backToNewersArticles}>
 						HOME
 					</Link>
 					<div className="d-flex justify-content-end align-items-center">
@@ -128,6 +140,8 @@ Nav.propTypes = {
 	userInfo: PropTypes.object,
 	logOutAccount: PropTypes.func.isRequired,
 	openLoginComponent: PropTypes.func.isRequired,
+	showPosts: PropTypes.func.isRequired,
+	showLoader: PropTypes.func.isRequired,
 };
 
 Nav.defaultProps = {
@@ -140,7 +154,7 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = { openLoginComponent, logOutAccount };
+const mapDispatchToProps = { openLoginComponent, logOutAccount, showPosts, showLoader };
 
 export default connect(
 	mapStateToProps,

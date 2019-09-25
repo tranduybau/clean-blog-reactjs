@@ -81,11 +81,13 @@ export const closeSearchComponent = () => {
 	};
 };
 
-export const searchPosts = keyword => {
+export const searchPosts = Obj => {
 	return dispatch => {
+		const { keyword, page } = Obj;
+
 		dispatch(searchPostsByKeyword());
 		axios
-			.get(`http://localhost:3000/articles?_page=${1}&title=${keyword}`)
+			.get(`http://localhost:3000/articles?q=${keyword}&_page=${page}`)
 			.then(res => dispatch(searchPostsByKeywordSuccess(res.data)))
 			.catch(error => dispatch(searchPostsByKeywordFailed(error)));
 	};

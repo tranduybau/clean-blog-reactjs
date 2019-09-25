@@ -16,7 +16,7 @@ class Main extends Component {
 					<Route path="/about" component={About} />
 					<Route path="/contact" component={Contact} />
 					<Route path="/detail-post/:postId" component={props => <DetailPost {...props} />} />
-					<Search path="/search/" />
+					<Route path="/search/" component={props => <Search {...props} />} />
 				</Switch>
 			</div>
 		);
