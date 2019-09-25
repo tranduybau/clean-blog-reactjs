@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { showPosts, clearInfoPost, showLoader } from "dispatchers";
+import { clearInfoPost, showLoader, searchPosts } from "dispatchers";
 
 import ArticleItem from "../../shared/ArticleItem/index";
 
@@ -14,10 +14,11 @@ class Search extends Component {
 		this.state = {
 			post: {},
 			page: 1,
+			isLoadingArticles: false,
 		};
 
-		this.getNewerArticles = this.getNewerArticles.bind(this);
-		this.getOlderArticles = this.getOlderArticles.bind(this);
+		this.paginator = this.paginator.bind(this);
+		this.goToTop = this.goToTop.bind(this);
 	}
 
 	goToTop() {
@@ -25,36 +26,30 @@ class Search extends Component {
 		document.documentElement.scrollTop = 0;
 	}
 
-	getOlderArticles() {
-		let currentPage = this.state.page + 1;
+	paginator(number) {
+		const { keyword } = this.props.match.params;
+		let page = this.state.page + number;
+
+		this.props.searchPosts({ keyword, page });
+		this.goToTop();
+		this.props.showLoader();
 
 		this.setState({
-			page: currentPage,
+			page: page,
 		});
-
-		this.props.showPosts(currentPage);
-		this.goToTop();
-	}
-	getNewerArticles() {
-		let currentPage = this.state.page - 1;
-
-		this.setState({
-			page: currentPage,
-		});
-
-		this.props.showPosts(currentPage);
-		this.goToTop();
 	}
 
 	componentDidMount() {
-		document.body.scrollTop = 0;
-		document.documentElement.scrollTop = 0;
+		const { keyword } = this.props.match.params;
+		const page = this.state.page;
 
-		this.props.showLoader();
-		this.props.showPosts(this.state.page);
-		this.props.clearInfoPost();
+		this.props.searchPosts({ keyword, page });
 		this.goToTop();
+		this.props.showLoader();
+		this.props.clearInfoPost();
 	}
+
+	componentDidUpdate() {}
 
 	/* RENDER */
 	render() {
@@ -77,13 +72,13 @@ class Search extends Component {
 								<Link
 									className={`btn btn-primary mr-auto ${this.state.page === 1 ? "d-none" : ""}`}
 									to="#"
-									onClick={this.getNewerArticles}>
+									onClick={() => this.paginator(-1)}>
 									&larr; Newer Posts
 								</Link>
 								<Link
-									className={`btn btn-primary ml-auto ${posts.length === 0 ? "d-none" : ""}`}
+									className={`btn btn-primary ml-auto ${posts.length < 10 ? "d-none" : ""}`}
 									to="#"
-									onClick={this.getOlderArticles}>
+									onClick={() => this.paginator(1)}>
 									Older Posts &rarr;
 								</Link>
 							</div>
@@ -96,10 +91,10 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-	showPosts: PropTypes.func.isRequired,
 	clearInfoPost: PropTypes.func.isRequired,
 	post: PropTypes.object,
 	showLoader: PropTypes.func.isRequired,
+	searchPosts: PropTypes.func.isRequired,
 };
 
 Search.defaultProps = {
@@ -113,9 +108,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-	showPosts,
 	clearInfoPost,
 	showLoader,
+	searchPosts,
 };
 
 export default connect(

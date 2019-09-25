@@ -30,7 +30,7 @@ export const showPosts = page => {
 	return dispatch => {
 		dispatch(getDataOfAllPosts());
 		axios
-			.get(`http://localhost:3000/articles?_page=${page}`)
+			.get(`http://localhost:3000/articles?_page=${page}&_sort=createdAt&_order=desc`)
 			.then(res => {
 				dispatch(getDataOfAllPostsSuccessed(res.data));
 			})

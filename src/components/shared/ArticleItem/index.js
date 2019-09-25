@@ -7,6 +7,7 @@ class ArticleItem extends Component {
 		super(props);
 
 		this.shortHandDescription = this.shortHandDescription.bind(this);
+		this.changeGetTimeToDay = this.changeGetTimeToDay.bind(this);
 	}
 
 	shortHandDescription(Str) {
@@ -14,6 +15,12 @@ class ArticleItem extends Component {
 			if (Str[99] === " ") return `${Str.substring(3, 94)}...`;
 			else return `${Str.substring(3, 95)}...`;
 		return Str;
+	}
+
+	changeGetTimeToDay(Str) {
+		const number = String(new Date(Number(Str)));
+
+		return number.substring(0, 15);
 	}
 
 	render() {
@@ -31,13 +38,7 @@ class ArticleItem extends Component {
 					/>
 				</Link>
 				<p className="post-meta ">
-					Posted at{" "}
-					<b>
-						{Date(item.createdAt)
-							.substring(0, 15)
-							.trim()}
-					</b>
-					, by {item.author.name}
+					Posted at <b>{this.changeGetTimeToDay(item.createdAt)}</b>, by {item.author.name}
 				</p>
 			</div>
 		);
