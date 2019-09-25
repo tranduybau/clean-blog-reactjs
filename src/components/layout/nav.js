@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import { openLoginComponent, logOutAccount, showPosts, showLoader } from "dispatchers";
 
 class Nav extends Component {
 	constructor(props) {
@@ -7,6 +11,24 @@ class Nav extends Component {
 
 		this.openSearchLayout = this.openSearchLayout.bind(this);
 		this.openLoginLayout = this.openLoginLayout.bind(this);
+		this.logOut = this.logOut.bind(this);
+		this.goToTop = this.goToTop.bind(this);
+		this.backToNewersArticles = this.backToNewersArticles.bind(this);
+
+		this.state = {
+			userInfo: {},
+		};
+	}
+
+	goToTop() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+
+	backToNewersArticles() {
+		this.props.showPosts(1);
+		this.goToTop();
+		this.props.showLoader();
 	}
 
 	openSearchLayout(event) {
@@ -20,7 +42,11 @@ class Nav extends Component {
 	openLoginLayout(event) {
 		event.preventDefault();
 
-		console.log("Lô");
+		this.props.openLoginComponent();
+	}
+
+	logOut() {
+		this.props.logOutAccount();
 	}
 
 	componentDidMount() {
@@ -33,6 +59,9 @@ class Nav extends Component {
 
 				let navbar = document.getElementById("mainNav");
 				let heightOfNavbar = document.getElementById("mainNav").offsetHeight;
+
+				let positionStartFixed = document.querySelector("header .overlay").offsetHeight + 16;
+				console.log(positionStartFixed);
 
 				if (st < lastScrollTop) {
 					if (st === 0) {
@@ -51,7 +80,7 @@ class Nav extends Component {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 				<div className="container">
-					<Link className="navbar-brand" to="/">
+					<Link className="navbar-brand" to="/" onClick={this.backToNewersArticles}>
 						HOME
 					</Link>
 					<div className="d-flex justify-content-end align-items-center">
@@ -62,9 +91,43 @@ class Nav extends Component {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
-									Login
-								</Link>
+								{this.props.userInfo.user.name ? (
+									<Link
+										to="/"
+										className="nav-link dropdown"
+										id="dropdownMenuLink"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">
+										<span>Hello {this.props.userInfo.user.name}</span>
+										<div
+											className="dropdown-menu right-0 left-auto"
+											aria-labelledby="dropdownMenuLink">
+											<Link to="" className="dropdown-item">
+												Create A New Article
+											</Link>
+											<Link to="" className="dropdown-item">
+												Manage Articles
+											</Link>
+											<Link to="" className="dropdown-item">
+												Create A New Category
+											</Link>
+											<Link to="" className="dropdown-item">
+												Manage Categories
+											</Link>
+											<Link to="" className="dropdown-item">
+												Manage Users
+											</Link>
+											<Link to="" className="dropdown-item" onClick={this.logOut}>
+												Logout
+											</Link>
+										</div>
+									</Link>
+								) : (
+									<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
+										Login
+									</Link>
+								)}
 							</li>
 						</ul>
 					</div>
@@ -74,4 +137,27 @@ class Nav extends Component {
 	}
 }
 
-export default Nav;
+Nav.propTypes = {
+	userInfo: PropTypes.object,
+	logOutAccount: PropTypes.func.isRequired,
+	openLoginComponent: PropTypes.func.isRequired,
+	showPosts: PropTypes.func.isRequired,
+	showLoader: PropTypes.func.isRequired,
+};
+
+Nav.defaultProps = {
+	userInfo: {},
+};
+
+const mapStateToProps = state => {
+	return {
+		userInfo: state.user,
+	};
+};
+
+const mapDispatchToProps = { openLoginComponent, logOutAccount, showPosts, showLoader };
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Nav);

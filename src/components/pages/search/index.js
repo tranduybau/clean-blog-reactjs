@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { showPosts, clearInfoPost, showLoader } from "dispatchers";
+import { clearInfoPost, showLoader, searchPosts } from "dispatchers";
 
 import ArticleItem from "../../shared/ArticleItem/index";
 
-class Home extends Component {
+class Search extends Component {
 	constructor(props) {
 		super(props);
 
@@ -27,19 +27,23 @@ class Home extends Component {
 	}
 
 	paginator(number) {
-		let currentPage = this.state.page;
+		const { keyword } = this.props.match.params;
+		let page = this.state.page + number;
 
-		this.props.showPosts(currentPage + number);
+		this.props.searchPosts({ keyword, page });
 		this.goToTop();
 		this.props.showLoader();
 
 		this.setState({
-			page: currentPage + number,
+			page: page,
 		});
 	}
 
 	componentDidMount() {
-		this.props.showPosts(this.state.page);
+		const { keyword } = this.props.match.params;
+		const page = this.state.page;
+
+		this.props.searchPosts({ keyword, page });
 		this.goToTop();
 		this.props.showLoader();
 		this.props.clearInfoPost();
@@ -63,7 +67,7 @@ class Home extends Component {
 											{index + 1 < posts.length ? <hr /> : ""}
 										</div>
 								  ))
-								: "Không còn bài nào á"}
+								: "Empty :>"}
 							<div className="d-flex align-items-center mt-4">
 								<Link
 									className={`btn btn-primary mr-auto ${this.state.page === 1 ? "d-none" : ""}`}
@@ -86,14 +90,14 @@ class Home extends Component {
 	}
 }
 
-Home.propTypes = {
-	showPosts: PropTypes.func.isRequired,
+Search.propTypes = {
 	clearInfoPost: PropTypes.func.isRequired,
 	post: PropTypes.object,
 	showLoader: PropTypes.func.isRequired,
+	searchPosts: PropTypes.func.isRequired,
 };
 
-Home.defaultProps = {
+Search.defaultProps = {
 	post: {},
 };
 
@@ -104,12 +108,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-	showPosts,
 	clearInfoPost,
 	showLoader,
+	searchPosts,
 };
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Home);
+)(Search);

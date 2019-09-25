@@ -23,13 +23,14 @@ import {
 	loginSuccessed,
 	openLoginBox,
 	closeLoginBox,
+	logOut,
 } from "../actions/actions";
 
 export const showPosts = page => {
 	return dispatch => {
 		dispatch(getDataOfAllPosts());
 		axios
-			.get(`http://localhost:3000/articles?_page=${page}`)
+			.get(`http://localhost:3000/articles?_page=${page}&_sort=createdAt&_order=desc`)
 			.then(res => {
 				dispatch(getDataOfAllPostsSuccessed(res.data));
 			})
@@ -43,9 +44,9 @@ export const showOnePost = id => {
 	return dispatch => {
 		dispatch(getDetailOfOnePost());
 		axios
-			.get(`http://localhost:3000/articles/${id}`)
+			.get(`http://localhost:3000/articles?slug=${id}`)
 			.then(res => {
-				dispatch(getDetailOfOnePostSuccessed(res.data));
+				dispatch(getDetailOfOnePostSuccessed(res.data[0]));
 			})
 			.catch(errors => {
 				dispatch(getDetailOfOnePostFailed(errors));
@@ -80,11 +81,13 @@ export const closeSearchComponent = () => {
 	};
 };
 
-export const searchPosts = keyword => {
+export const searchPosts = Obj => {
 	return dispatch => {
+		const { keyword, page } = Obj;
+
 		dispatch(searchPostsByKeyword());
 		axios
-			.get(`https://api.tvmaze.com/search/shows?q=${keyword}`)
+			.get(`http://localhost:3000/articles?q=${keyword}&_page=${page}`)
 			.then(res => dispatch(searchPostsByKeywordSuccess(res.data)))
 			.catch(error => dispatch(searchPostsByKeywordFailed(error)));
 	};
@@ -114,13 +117,25 @@ export const closeLoginComponent = () => {
 };
 
 export const fetchUser = userInfo => {
-	return dispatch => {
+	return async dispatch => {
+		const { email, password, checked } = userInfo;
+
 		dispatch(pendingLogin());
-		const isUserExist = axios.get(
-			`http://localhost:3000/users?email=${userInfo.email}&password=${userInfo.password}`
+		const isUserExist = await axios.get(
+			`http://localhost:3000/users?email=${email}&password=${password}`
 		);
 
-		if (isUserExist.length) dispatch(loginSuccessed(isUserExist[0]));
-		else dispatch(loginFailed());
+		if (isUserExist.data.length === 1) {
+			if (checked) localStorage.setItem("userInfo", JSON.stringify({ email, password }));
+
+			dispatch(loginSuccessed(isUserExist.data[0]));
+		} else dispatch(loginFailed({ error: "wrong username or password" }));
+	};
+};
+
+export const logOutAccount = () => {
+	return dispatch => {
+		localStorage.removeItem("userInfo");
+		dispatch(logOut());
 	};
 };

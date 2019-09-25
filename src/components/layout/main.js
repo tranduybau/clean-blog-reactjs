@@ -5,6 +5,7 @@ import Home from "../pages/home/index";
 import About from "../pages/about/index";
 import Contact from "../pages/contact/index";
 import DetailPost from "../pages/detail-post/index";
+import Search from "../pages/search/index";
 
 class Main extends Component {
 	render() {
@@ -15,7 +16,7 @@ class Main extends Component {
 					<Route path="/about" component={About} />
 					<Route path="/contact" component={Contact} />
 					<Route path="/detail-post/:postId" component={props => <DetailPost {...props} />} />
-					{/* <Route path="/search-by-key-word" component={Home} /> */}
+					<Route path="/search/:keyword" component={props => <Search {...props} />} />
 				</Switch>
 			</div>
 		);

@@ -28,11 +28,10 @@ class Searcher extends Component {
 
 	searchPostsByKeyWord = event => {
 		event.preventDefault();
-		this.props.searchPosts(this.state.value);
-		this.closeSearchBox();
-		this.props.history.push("/");
-		this.setState({ value: "" });
 		this.props.showLoader();
+		this.closeSearchBox();
+		this.props.history.push(`/search/${this.state.value}`);
+		this.setState({ value: "" });
 	};
 
 	render() {

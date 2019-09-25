@@ -1,1 +1,2 @@
-node: react-scripts start
+node: react-scripts build
+json-server: json-server db.json

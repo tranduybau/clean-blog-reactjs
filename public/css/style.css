@@ -6,12 +6,25 @@
 	top: 0;
 }
 
+.top-center {
+	top: 50%;
+	transform: translateY(-50%)
+}
+
 .left-0 {
 	left: 0;
 }
 
+.left-auto {
+	left: auto;
+}
+
 .right-0 {
 	right: 0;
+}
+
+.z-index--100 {
+	z-index: -100;
 }
 
 .z-index-99 {
@@ -36,10 +49,6 @@
 
 .z-index-1902 {
 	z-index: 1902;
-}
-
-.z-index--100 {
-	z-index: -100;
 }
 
 .font-size-1em {
@@ -73,4 +82,26 @@
 
 .loader--background {
 	background-color: #ffde54;
+}
+
+#loginSite {
+	max-width: 420px;
+	width: 100%;
+}
+
+.left-100 {
+	left: 100%;
+}
+
+.opacity-0 {
+	opacity: 0;
+}
+
+.justify-content-evenly {
+	justify-content: space-evenly
+}
+
+.article-item__feature__rate-point .d-flex small {
+	display: inline-block;
+	width: 24px;
 }
