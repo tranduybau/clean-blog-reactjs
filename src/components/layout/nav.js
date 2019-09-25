@@ -60,6 +60,9 @@ class Nav extends Component {
 				let navbar = document.getElementById("mainNav");
 				let heightOfNavbar = document.getElementById("mainNav").offsetHeight;
 
+				let positionStartFixed = document.querySelector("header .overlay").offsetHeight + 16;
+				console.log(positionStartFixed);
+
 				if (st < lastScrollTop) {
 					if (st === 0) {
 						navbar.classList.remove("is-fixed", "is-visible");
@@ -89,16 +92,14 @@ class Nav extends Component {
 							</li>
 							<li className="nav-item">
 								{this.props.userInfo.user.name ? (
-									<div className="dropdown">
-										<Link
-											to="/"
-											className="border-0 p-0 box-shadow-none bg-transparent nav-link text-white"
-											id="dropdownMenuLink"
-											data-toggle="dropdown"
-											aria-haspopup="true"
-											aria-expanded="false">
-											Hello {this.props.userInfo.user.name}
-										</Link>
+									<Link
+										to="/"
+										className="nav-link dropdown"
+										id="dropdownMenuLink"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">
+										<span>Hello {this.props.userInfo.user.name}</span>
 										<div
 											className="dropdown-menu right-0 left-auto"
 											aria-labelledby="dropdownMenuLink">
@@ -121,7 +122,7 @@ class Nav extends Component {
 												Logout
 											</Link>
 										</div>
-									</div>
+									</Link>
 								) : (
 									<Link to="/" className="nav-link" onClick={this.openLoginLayout}>
 										Login

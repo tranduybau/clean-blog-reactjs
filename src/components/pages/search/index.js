@@ -67,7 +67,7 @@ class Search extends Component {
 											{index + 1 < posts.length ? <hr /> : ""}
 										</div>
 								  ))
-								: "Không có bài nào á"}
+								: "Empty :>"}
 							<div className="d-flex align-items-center mt-4">
 								<Link
 									className={`btn btn-primary mr-auto ${this.state.page === 1 ? "d-none" : ""}`}

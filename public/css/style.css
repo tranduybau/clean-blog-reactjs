@@ -6,6 +6,11 @@
 	top: 0;
 }
 
+.top-center {
+	top: 50%;
+	transform: translateY(-50%)
+}
+
 .left-0 {
 	left: 0;
 }
@@ -90,4 +95,13 @@
 
 .opacity-0 {
 	opacity: 0;
+}
+
+.justify-content-evenly {
+	justify-content: space-evenly
+}
+
+.article-item__feature__rate-point .d-flex small {
+	display: inline-block;
+	width: 24px;
 }
