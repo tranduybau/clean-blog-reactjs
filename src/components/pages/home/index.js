@@ -39,10 +39,10 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		this.props.showLoader();
 		this.props.showPosts(this.state.page);
-		this.props.clearInfoPost();
 		this.goToTop();
+		this.props.showLoader();
+		this.props.clearInfoPost();
 	}
 
 	componentDidUpdate() {}
@@ -72,7 +72,7 @@ class Home extends Component {
 									&larr; Newer Posts
 								</Link>
 								<Link
-									className={`btn btn-primary ml-auto ${posts.length === 0 ? "d-none" : ""}`}
+									className={`btn btn-primary ml-auto ${posts.length < 10 ? "d-none" : ""}`}
 									to="#"
 									onClick={() => this.paginator(1)}>
 									Older Posts &rarr;

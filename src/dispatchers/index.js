@@ -44,9 +44,9 @@ export const showOnePost = id => {
 	return dispatch => {
 		dispatch(getDetailOfOnePost());
 		axios
-			.get(`http://localhost:3000/articles/${id}`)
+			.get(`http://localhost:3000/articles?slug=${id}`)
 			.then(res => {
-				dispatch(getDetailOfOnePostSuccessed(res.data));
+				dispatch(getDetailOfOnePostSuccessed(res.data[0]));
 			})
 			.catch(errors => {
 				dispatch(getDetailOfOnePostFailed(errors));

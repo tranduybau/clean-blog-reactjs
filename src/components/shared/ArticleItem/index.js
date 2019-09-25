@@ -21,7 +21,7 @@ class ArticleItem extends Component {
 
 		return (
 			<div className="post-preview">
-				<Link to={`/detail-post/${item.id}`}>
+				<Link to={`/detail-post/${item.slug}`}>
 					<h2 className="post-title">{item.title}</h2>
 					<h3
 						className="post-subtitle"
