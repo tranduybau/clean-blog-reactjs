@@ -40,8 +40,6 @@ class Nav extends Component {
 	}
 
 	openLoginLayout(event) {
-		event.preventDefault();
-
 		this.props.openLoginComponent();
 	}
 
@@ -59,9 +57,6 @@ class Nav extends Component {
 
 				let navbar = document.getElementById("mainNav");
 				let heightOfNavbar = document.getElementById("mainNav").offsetHeight;
-
-				let positionStartFixed = document.querySelector("header .overlay").offsetHeight + 16;
-				console.log(positionStartFixed);
 
 				if (st < lastScrollTop) {
 					if (st === 0) {

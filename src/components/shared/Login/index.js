@@ -114,6 +114,7 @@ class Login extends Component {
 									<input
 										type="password"
 										id="passwordBox"
+										autoComplete="true"
 										className="form-control rounded outline-0 box-shadow-none border-dark w-100 mt-3"
 										ref={this.password}
 										placeholder="Password"

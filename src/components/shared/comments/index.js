@@ -1,43 +1,77 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import Reply from "./reply";
 
 class Comment extends Component {
+	constructor(props) {
+		super(props);
+
+		this.formatTime = this.formatTime.bind(this);
+		this.formatDay = this.formatDay.bind(this);
+	}
+
+	formatTime(Str) {
+		const time = new Date(Number(Str)).toTimeString();
+
+		return String(time)
+			.substring(0, 8)
+			.trim();
+	}
+
+	formatDay(Str) {
+		const time = new Date(Number(Str)).toDateString();
+
+		return String(time)
+			.substring(4, 15)
+			.trim();
+	}
+
 	render() {
+		const { comments } = this.props;
+
 		return (
-			<article>
-				<div className="container position-relative">
-					<div className="row">
-						<div
-							className="col-lg-8 col-md-10 mx-auto text-justify"
-							dangerouslySetInnerHTML={{ __html: "" }}
-						/>
-						<div className="col-lg-10 my-4 mx-auto">
-							<img src={``} alt="" className="w-100" />
-						</div>
-						<div className="position-absolute right-0 top-0 mt-5">
-							<div>
-								<div className="d-flex align-items-center justify-content-center flex-column article-item__feature__rate-point">
-									<div className="d-flex align-items-center">
-										<i className="far fa-comment mr-1"></i>
-										<small className="text-left">{``}</small>
-									</div>
-									<div className="d-flex w-100 ml-auto">
-										<div className="d-flex flex-column justify-content-center align-items-center flex-grow-1 mr-1 mt-n1">
-											<i className="fas fa-caret-up mb-n1"></i>
-											<i className="fas fa-caret-down mt-n2"></i>
+			<div className="col-lg-10 my-4 mx-auto">
+				<h4>Comments</h4>
+				<hr className="" />
+				{comments && comments.amount
+					? comments.commentedBy.map((comment, index) => (
+							<div key={index}>
+								<div className="d-flex my-2">
+									<img alt="" src={comment.avatar} width="50" height="50" className="img-cover" />
+									<div className="ml-2 flex-grow-1">
+										<div>
+											<small className="font-weight-bold">{comment.name}</small>{" "}
+											<small>
+												<small>
+													on {""}
+													<span>{this.formatDay(comment.createdAt)}</span> at{" "}
+													<span>{this.formatTime(comment.createdAt)}</span>
+												</small>
+											</small>
 										</div>
-										<small className="text-left">{``}</small>
+										<div id={`reply-${comment.id}`}>
+											<div>
+												<small>{comment.content}</small>
+											</div>
+											{comment.reply.length
+												? comment.reply.map((reply, index) => (
+														<div key={index}>
+															<Reply reply={reply} />
+														</div>
+												  ))
+												: ""}
+										</div>
 									</div>
 								</div>
+								{index + 1 < comments.amount ? <hr /> : ""}
 							</div>
-						</div>
-					</div>
-					) : (
-					<div className="alert alert-danger text-uppercase">
-						this link doesn't redirect to any page
-					</div>
-					)}
-				</div>
-			</article>
+					  ))
+					: ""}
+			</div>
 		);
 	}
 }
+
+export default Comment;
