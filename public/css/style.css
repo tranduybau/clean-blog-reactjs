@@ -101,7 +101,31 @@
 	justify-content: space-evenly
 }
 
+.img-cover {
+	object-fit: cover;
+	object-position: center center;
+}
+
+.img-contain {
+	object-fit: contain;
+	object-position: center center;
+}
+
 .article-item__feature__rate-point .d-flex small {
 	display: inline-block;
 	width: 24px;
+}
+
+.transform-translateY--50 {
+	transform: translateY(-50%)
+}
+
+#root .App {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
 }

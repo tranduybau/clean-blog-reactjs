@@ -65,7 +65,7 @@ export const showLoader = () => {
 		dispatch(startLoading());
 		setTimeout(() => {
 			dispatch(stopLoading());
-		}, 1500);
+		}, 2000);
 	};
 };
 

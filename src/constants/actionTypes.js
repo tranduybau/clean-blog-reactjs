@@ -29,3 +29,6 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 export const LOGIN_SUCCESSED = "LOGIN_SUCCESSED";
 
 export const LOGOUT = "LOGOUT";
+
+export const UP_VOTE_POST = "UP_VOTE_POST";
+export const DOWN_VOTE_POST = "DOWN_VOTE_POST";
