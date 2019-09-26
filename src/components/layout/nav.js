@@ -92,35 +92,21 @@ class Nav extends Component {
 							</li>
 							<li className="nav-item">
 								{this.props.userInfo.user.name ? (
-									<Link
-										to="/"
-										className="nav-link dropdown"
-										id="dropdownMenuLink"
-										data-toggle="dropdown"
-										aria-haspopup="true"
-										aria-expanded="false">
-										<span>Hello {this.props.userInfo.user.name}</span>
+									<Link to="/" className="nav-link dropdown ">
+										<span className="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown">
+											Hello {this.props.userInfo.user.name}
+										</span>
 										<div
 											className="dropdown-menu right-0 left-auto"
 											aria-labelledby="dropdownMenuLink">
-											<Link to="" className="dropdown-item">
-												Create A New Article
-											</Link>
-											<Link to="" className="dropdown-item">
-												Manage Articles
-											</Link>
-											<Link to="" className="dropdown-item">
-												Create A New Category
-											</Link>
-											<Link to="" className="dropdown-item">
-												Manage Categories
-											</Link>
-											<Link to="" className="dropdown-item">
-												Manage Users
-											</Link>
-											<Link to="" className="dropdown-item" onClick={this.logOut}>
+											<div className="dropdown-item">Create A New Article</div>
+											<div className="dropdown-item">Manage Articles</div>
+											<div className="dropdown-item">Create A New Category</div>
+											<div className="dropdown-item">Manage Categories</div>
+											<div className="dropdown-item">Manage Users</div>
+											<div className="dropdown-item" onClick={this.logOut}>
 												Logout
-											</Link>
+											</div>
 										</div>
 									</Link>
 								) : (
